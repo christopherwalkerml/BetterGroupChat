@@ -19,26 +19,21 @@ public class CommandHandler implements CommandExecutor {
             if (player.hasPermission("multitool.command")) {
                 if (cmd.getName().equalsIgnoreCase("GroupChat")) {
                     if (args.length == 1) {
+                        if (args[0].equalsIgnoreCase("leave") || args[0].equalsIgnoreCase("l")) {
 
-                    } else if (args.length == 2) {
-                        if (args[0].equalsIgnoreCase("group") || args[0].equalsIgnoreCase("g")) {
+                        } else if (args[0].equalsIgnoreCase("invite") || args[0].equalsIgnoreCase("i")) {
 
                         }
-                    } else if (args.length == 3) {
-                        if (args[0].equalsIgnoreCase("group") || args[0].equalsIgnoreCase("g")) {
-                            if (args[1].equalsIgnoreCase("create") || args[0].equalsIgnoreCase("c")) {
-                                if (GroupChat.createGroup(player, args[2])) {
-                                    player.sendMessage(BetterChatManager.prefix + ChatColor.GREEN + "Successfully created group " + ChatColor.WHITE + args[2]);
-                                } else {
-                                    player.sendMessage(BetterChatManager.prefix + ChatColor.RED + "Couldn't create group. You are already in too many!");
-                                }
-                            } else if (args[1].equalsIgnoreCase("join") || args[0].equalsIgnoreCase("j")) {
+                    } else if (args.length == 2) {
+                        if (args[0].equalsIgnoreCase("create") || args[0].equalsIgnoreCase("c")) {
+                            ReturnPackage ret = GroupChat.createGroup(player, args[1]);
+                            player.sendMessage(BetterChatManager.prefix + ret.message);
+                        } else if (args[0].equalsIgnoreCase("join") || args[0].equalsIgnoreCase("j")) {
 
-                            } else if (args[1].equalsIgnoreCase("leave") || args[0].equalsIgnoreCase("l")) {
+                        } else if (args[0].equalsIgnoreCase("leave") || args[0].equalsIgnoreCase("l")) {
 
-                            } else if (args[1].equalsIgnoreCase("invite") || args[0].equalsIgnoreCase("i")) {
+                        } else if (args[0].equalsIgnoreCase("invite") || args[0].equalsIgnoreCase("i")) {
 
-                            }
                         }
                     }
                 }

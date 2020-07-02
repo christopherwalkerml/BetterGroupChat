@@ -8,24 +8,14 @@ public class Member {
 
     private Player player;
     private ArrayList<GroupChat> groups;
-    private boolean isLeader;
 
-    Member(Player newMember, boolean leader) {
+    Member(Player newMember) {
         player = newMember;
-        isLeader = leader;
         groups = new ArrayList<>();
     }
 
     public Player getPlayer() {
         return player;
-    }
-
-    public boolean getLeader() {
-        return isLeader;
-    }
-
-    public void setLeader(boolean leader) {
-        isLeader = leader;
     }
 
     public boolean addGroup(GroupChat newGroup) {
