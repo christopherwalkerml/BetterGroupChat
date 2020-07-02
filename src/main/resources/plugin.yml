@@ -1,0 +1,29 @@
+name: BetterChatManager
+version: 1.0.0
+main: me.darkolythe.betterchatmanager.BetterChatManager
+api-version: 1.13
+
+commands:
+  groupchat:
+    usage: /<command> [group]
+    aliases: [gc]
+    description: the main GroupChat command
+    permission: bettergroupchat.command
+    permission-message: You do not have permission!
+
+permissions:
+  bettergroupchat.command:
+    description: Allows the use of the BetterGroupChat commands
+    default: op
+  bettergroupchat.limit.1:
+    description: Allows the user to be a part of only 1 group
+    default: op
+  bettergroupchat.limit.3:
+    description: Allows the user to be a part of only 3 groups
+    default: op
+  bettergroupchat.limit.5:
+    description: Allows the user to be a part of only 5 groups
+    default: op
+  bettergroupchat.limit.none:
+    description: Allows the user to be a part of unlimited(1000) groups (not recommended)
+    default: op
