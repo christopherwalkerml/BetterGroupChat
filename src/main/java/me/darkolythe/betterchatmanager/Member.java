@@ -8,6 +8,7 @@ public class Member {
 
     private Player player;
     private ArrayList<GroupChat> groups;
+    private GroupChat currentGroup;
 
     Member(Player newMember) {
         player = newMember;
@@ -34,14 +35,21 @@ public class Member {
         return false;
     }
 
+    public ArrayList<GroupChat> getGroups() {
+        return groups;
+    }
+
     public boolean canAddGroup() {
         int current = groups.size();
 
-        if (player.hasPermission("bettergroupchat.limit.none")) {
-            return current < 1000;
+        if (player.hasPermission("bettergroupchat.limit.36")) {
+            return current < 36;
         }
-        if (player.hasPermission("bettergroupchat.limit.5")) {
-            return current < 5;
+        if (player.hasPermission("bettergroupchat.limit.18")) {
+            return current < 18;
+        }
+        if (player.hasPermission("bettergroupchat.limit.9")) {
+            return current < 9;
         }
         if (player.hasPermission("bettergroupchat.limit.3")) {
             return current < 3;

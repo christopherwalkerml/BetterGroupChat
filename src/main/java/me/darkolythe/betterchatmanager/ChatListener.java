@@ -1,6 +1,7 @@
 package me.darkolythe.betterchatmanager;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -29,7 +30,8 @@ public class ChatListener implements Listener {
         Bukkit.getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
             @Override
             public void run() {
-                player.sendMessage("[Group 1] [Player DM] [General]");
+                ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+                Bukkit.getServer().dispatchCommand(console, "tellraw @a " + "[\"\",{\"text\":\"[General]\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/gamemode survival\"}},{\"text\":\"[Tester]\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/gc manage\"}}]");
             }
         }, 1L);
 

@@ -6,10 +6,12 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.UUID;
 
 public class GroupChat {
 
     private String name;
+    private UUID id;
     private ArrayList<Member> members;
     private Member leader;
     private Queue<Message> messages;
@@ -18,10 +20,13 @@ public class GroupChat {
 
     GroupChat(Member newLeader, String newName) {
         members = new ArrayList<>();
+        invited = new ArrayList<>();
         leader = newLeader;
         messages = new PriorityQueue<>();
         name = newName;
         isOpen = false;
+
+        id = UUID.randomUUID();
 
         members.add(newLeader);
     }
@@ -58,6 +63,22 @@ public class GroupChat {
         member.removeGroup(this);
     }
 
+    public ArrayList<Member> getMembers() {
+        return members;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public UUID getID() {
+        return id;
+    }
+
+    public Member getLeader() {
+        return leader;
+    }
+
     /**
      * Creates a new group with a leader and a name.
      * @param leader Member to be the group leader
@@ -75,17 +96,21 @@ public class GroupChat {
         return new ReturnPackage(false, ChatColor.RED + "You are already in too many groups!");
     }
 
-    public ReturnPackage inviteMember(String player) {
-        for (Player p : BetterChatManager.getInstance().getServer().getOnlinePlayers()) {
-            if (p.getName().equalsIgnoreCase(player) || p.getDisplayName().equalsIgnoreCase(player)) {
-                Member member = BetterChatManager.members.get(p);
-                if (member.canAddGroup()) {
-                    invited.add(p);
-                    return new ReturnPackage(true, ChatColor.GREEN + p.getName() + " was invited to the group!");
+    public ReturnPackage inviteMember(Member inviter, String player) {
+        if (inviter.equals(leader)) {
+            for (Player p : BetterChatManager.getInstance().getServer().getOnlinePlayers()) {
+                if (p.getName().equalsIgnoreCase(player) || p.getDisplayName().equalsIgnoreCase(player)) {
+                    Member member = BetterChatManager.members.get(p);
+                    if (member.canAddGroup()) {
+                        invited.add(member);
+                        return new ReturnPackage(true, ChatColor.GREEN + p.getName() + " was invited to the group!");
+                    }
+                    return new ReturnPackage(false, ChatColor.RED + p.getName() + " is in too many groups!");
                 }
-                return new ReturnPackage(false, ChatColor.RED + p.getName() + " is in too many groups!");
             }
+            return new ReturnPackage(false, ChatColor.RED + player + " is not online.");
+        } else {
+            return new ReturnPackage(false, ChatColor.RED + "You are not allowed to invite members.");
         }
-        return new ReturnPackage(false, ChatColor.RED + player + " is not online.");
     }
 }

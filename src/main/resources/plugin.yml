@@ -21,9 +21,12 @@ permissions:
   bettergroupchat.limit.3:
     description: Allows the user to be a part of only 3 groups
     default: op
-  bettergroupchat.limit.5:
+  bettergroupchat.limit.9:
     description: Allows the user to be a part of only 5 groups
     default: op
-  bettergroupchat.limit.none:
-    description: Allows the user to be a part of unlimited(1000) groups (not recommended)
+  bettergroupchat.limit.18:
+    description: Allows the user to be a part of only 10 groups
+    default: op
+  bettergroupchat.limit.36:
+    description: Allows the user to be a part of 36 groups
     default: op

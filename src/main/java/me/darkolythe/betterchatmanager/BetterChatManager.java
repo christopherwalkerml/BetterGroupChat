@@ -13,6 +13,7 @@ public final class BetterChatManager extends JavaPlugin {
 
     private static BetterChatManager plugin;
     private ChatListener chatlistener = new ChatListener(this);
+    private JoinListener joinlistener = new JoinListener();
 
     public static ArrayList<GroupChat> groups = new ArrayList<>();
     public static HashMap<Player, Member> members = new HashMap<>();
@@ -22,6 +23,9 @@ public final class BetterChatManager extends JavaPlugin {
         plugin = this;
 
         getServer().getPluginManager().registerEvents(chatlistener, this);
+        getServer().getPluginManager().registerEvents(joinlistener, this);
+
+        getCommand("groupchat").setExecutor(new CommandHandler());
     }
 
     @Override
